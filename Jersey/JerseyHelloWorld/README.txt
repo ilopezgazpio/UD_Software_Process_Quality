@@ -1,5 +1,5 @@
 EXECUTION STEPS
----------------
+===============
 1. mvn compile
 
 In three separate cmd windows, run:
@@ -10,7 +10,7 @@ In three separate cmd windows, run:
 
 
 What is Jersey ?
------------------
+=================
 If your're thinking on clothes, it seems you need to start attending lessons...
 
 Jersey is the open source reference implementation of Java JAX-RS specification.
@@ -18,28 +18,28 @@ This specification provides a Java library to easily create RESTful web services
 
 
 What is a RESTful web service ?
---------------------------------
+================================
 REST (Representational State Transfer) is an architectural style which is based on web-standards and the HTTP protocol.
 
 REST is popular due to its simplicity and the fact that it builds upon existing systems and features of the internet's Hypertext Transfer Protocol (HTTP) in order to achieve its objectives, as opposed to creating new standards, frameworks and technologies.
 
 
 What are these objectives ?
-----------------------------
+============================
 To communicate distinct Java artifacts as microservices.
 
 
 What are microservices ?
--------------------------
+=========================
 The Microservice paradigm is a form of service-oriented architecture style (one of the most important skills for Java developers) wherein applications are built as a collection of different smaller services rather than one whole app
 
 Really, I'm getting tired... so what the hell is Jersey ?
----------------------------------------------------------
+==========================================================
 A technology we will be using in class to communicate clients and servers, using all the goodness of features described above ;)
 
 
 Important details to take into account in the code
---------------------------------------------------
+===================================================
 
 1. Note the hostname and port definition in the pom
 2. Note how 3 execution calls will be made
@@ -61,20 +61,49 @@ curl -X POST -H 'Content-Type:application/json' http://localhost:8080/rest/resou
 5. Note that server.RestServer implements the functionality of a server like an AppService that needs to pull the remote resource to perfom its functionality
 5.1. This happens because in RESTful microservices we always have stateless connections (HTTP), and it is the resource that needs the information the one with the responsibility to call the remote resource
 
+Panic Zone
+===========
 
+Si falla Jersey y no sabes porque, pero ves un error relacionado con javax.actiation añade esto al pom
 
+```
+   <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <version>2.3.0</version>
+   </dependency>
 
+   <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-core</artifactId>
+      <version>2.3.0</version>
+   </dependency>
 
+   <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <version>2.3.0</version>
+   </dependency>
 
+   <dependency>
+      <groupId>javax.activation</groupId>
+      <artifactId>activation</artifactId>
+      <version>1.1.1</version>
+   </dependency>
+```
 
+y asegurate de que estas utilizando una versión del Javadoc actualizada
 
-
-
-
-
-
-
-
-
-
-
+```
+   <build>
+      <plugins>
+         <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+               <version>3.7.0</version>
+               <configuration>
+                  <source>1.8</source>
+                  <target>1.8</target>
+                  <encoding>UTF-8</encoding>
+               </configuration>
+         </plugin>
+```

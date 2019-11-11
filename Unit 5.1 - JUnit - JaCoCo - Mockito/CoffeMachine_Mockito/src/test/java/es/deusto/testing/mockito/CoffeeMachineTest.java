@@ -17,43 +17,59 @@ import com.app.mechanism.interfaces.ICoffeeMachine;
 import com.app.mechanism.interfaces.IContainer;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CoffeeMachineTest {
+public class CoffeeMachineTest
+{
 
     ICoffeeMachine coffeeMachine;
 
     @Mock
     IContainer coffeeContainer;
+
     @Mock
     IContainer waterContainer;
 
     @Before
-    public void setUp() {
-	coffeeMachine = new CoffeeMachine(coffeeContainer, waterContainer);
+    public void setUp()
+    {
+        coffeeMachine = new CoffeeMachine(coffeeContainer, waterContainer);
     }
 
     @After
-    public void tearDown() {
-	coffeeContainer = null;
-	waterContainer = null;
-	coffeeMachine = null;
+    public void tearDown()
+    {
+        coffeeContainer = null;
+        waterContainer = null;
+        coffeeMachine = null;
     }
 
     @Test
-    public void testMakeCoffee() throws NotEnoughException {
+    public void testMakeCoffee() throws NotEnoughException
+    {
+        when(coffeeContainer.getPortion(Portion.LARGE)).thenReturn(true);
+        when(waterContainer.getPortion(Portion.LARGE)).thenReturn(true);
 
-	when(coffeeContainer.getPortion(Portion.LARGE)).thenReturn(true);
-	when(waterContainer.getPortion(Portion.LARGE)).thenReturn(true);
-
-	assertTrue(coffeeMachine.makeCoffee(Portion.LARGE));
+        assertTrue(coffeeMachine.makeCoffee(Portion.LARGE));
     }
 
     @Test
-    public void testNotEnoughException() throws NotEnoughException {
+    public void testNotEnough() throws NotEnoughException
+    {
 
-	when(coffeeContainer.getPortion(Portion.SMALL)).thenReturn(false);
-	when(waterContainer.getPortion(Portion.SMALL)).thenReturn(true);
+        when(coffeeContainer.getPortion(Portion.SMALL)).thenReturn(false);
+        when(waterContainer.getPortion(Portion.SMALL)).thenReturn(true);
 
-	assertFalse(coffeeMachine.makeCoffee(Portion.SMALL));
+        assertFalse(coffeeMachine.makeCoffee(Portion.SMALL));
+    }
 
+    @Test (expected=NotEnoughException.class)
+    public void testNotEnoughException() throws NotEnoughException
+    {
+
+        when(coffeeContainer.getPortion(Portion.MEDIUM)).thenThrow (
+                new NotEnoughException("Refill the " + coffeeContainer.getClass().getName())
+        );
+
+        //when(waterContainer.getPortion(Portion.MEDIUM)).thenReturn(true);
+        coffeeMachine.makeCoffee(Portion.MEDIUM);
     }
 }

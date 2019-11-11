@@ -5,37 +5,45 @@ import com.app.exceptions.NotEnoughException;
 import com.app.mechanism.interfaces.ICoffeeMachine;
 import com.app.mechanism.interfaces.IContainer;
 
-public class CoffeeMachine implements ICoffeeMachine {
+public class CoffeeMachine implements ICoffeeMachine
+{
 
     private IContainer coffeeContainer;
     private IContainer waterContainer;
 
-    public CoffeeMachine(IContainer cContainer, IContainer wContainer) {
-	coffeeContainer = cContainer;
-	waterContainer = wContainer;
+    public CoffeeMachine(IContainer cContainer, IContainer wContainer)
+    {
+        coffeeContainer = cContainer;
+        waterContainer = wContainer;
     }
 
     @Override
-    public boolean makeCoffee(Portion portion) throws NotEnoughException {
+    public boolean makeCoffee(Portion portion) throws NotEnoughException
+    {
 
-	boolean isEnoughCoffee = coffeeContainer.getPortion(portion);
-	boolean isEnoughWater = waterContainer.getPortion(portion);
+        boolean isEnoughCoffee = coffeeContainer.getPortion(portion);
+        boolean isEnoughWater = waterContainer.getPortion(portion);
 
-	if (isEnoughCoffee && isEnoughWater) {
-	    return true;
-	} else {
-	    return false;
-	}
+        if (isEnoughCoffee && isEnoughWater)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     @Override
-    public IContainer getWaterContainer() {
-	return waterContainer;
+    public IContainer getWaterContainer()
+    {
+        return waterContainer;
     }
 
     @Override
-    public IContainer getCoffeeContainer() {
-	return coffeeContainer;
+    public IContainer getCoffeeContainer()
+    {
+        return coffeeContainer;
     }
 
 }

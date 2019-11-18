@@ -1,6 +1,7 @@
 Profiler useful commands (VisualVM)
 ====================================
 Download tool: https://visualvm.github.io/download.html
+
 Intellij -> Settings -> Plugins -> Browse repository -> VisualVM Launcher -> install -> restart IDE
 
 mvn exec:java -Papp
@@ -45,7 +46,7 @@ Executes the test repeatedly for at least 20,000 milliseconds (20 seconds)
 - @Required(throughput = 20)
 Requires to have at least 20 test executions per second
 
-@Required(average = 50)
+- @Required(average = 50)
 Requires an average execution time of not more than 50 milliseconds
 
 - @Required(median = 45)
@@ -60,13 +61,13 @@ Requires that the sum of all execution times is not more than 5000 milliseconds 
 - @Required(percentile90 = 3000)
 Requires that 90% of all executions do not take longer than 3000 milliseconds
 
-@Required(percentile95 = 5000)
+- @Required(percentile95 = 5000)
 Requires that 95% of all executions do not take longer than 5000 milliseconds
 
-@Required(percentile99 = 10000)
+- @Required(percentile99 = 10000)
 Requires that 99% of all executions do not take longer than 10000 milliseconds
 
-@Required(percentiles = "66:200,96:500"):
+- @Required(percentiles = "66:200,96:500"):
 Requires that 66% of all executions do not take longer than 200 milliseconds and 96% of all executions do not take longer than 500 milliseconds
 
 
